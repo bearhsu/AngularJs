@@ -23,12 +23,11 @@ eApp.controller('maintenanceController', function($scope, $controller) {
         for(var i in $scope.main.data) {
             if($scope.main.data[i].CUST_ID == $scope.tmpData.CUST_ID) {
                 $scope.main.data[i] = angular.extend($scope.main.data[i],removeNull($scope.tmpData));
-                isChange = true;
                 alert('修改成功!');
                 return;
             }
         }
-        alert('找無此會員: ' + $scope.tmpData.CUST_ID);
+        alert('無此會員: ' + $scope.tmpData.CUST_ID);
     }
     
     function removeNull(data) {

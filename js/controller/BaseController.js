@@ -10,7 +10,7 @@
  * 	[function] 
  * 
  * -----------------------------------------------------------------------------*/
-eApp.controller('BaseController', function ($rootScope, $scope, $http, $filter, $window, $timeout) {
+eApp.controller('BaseController', function ($rootScope, $scope, $http, $filter, $window, $timeout, sysInfoService) {
 	$scope.controllerName = "";
 	$rootScope.language = $window.navigator.language || $window.navigator.userLanguage;
 	/* current controller name */

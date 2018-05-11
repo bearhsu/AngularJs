@@ -2,7 +2,7 @@ eApp.directive("paging", function($parse) {
     return {
         restrict: 'E',
         scope: {
-            list: '=',
+            size: '=',
             begin: '=',
             limit: '=?',
             buttons: '@?'
@@ -16,7 +16,7 @@ eApp.directive("paging", function($parse) {
                 vm.begin = (vm.currentPage-1) * vm.limit;
             });
 
-            vm.$watch('list.length',function() {
+            vm.$watch('size',function() {
                 vm.active(1);
             });
 
@@ -25,7 +25,6 @@ eApp.directive("paging", function($parse) {
             };
 
             function getRange() {
-                vm.size = vm.list.length;
                 vm.total = Math.ceil(vm.size/vm.limit);
                 var start = (vm.currentPage - 2 > 0) ? vm.currentPage - 2 : 1;
                 var end = (vm.currentPage + 2 < vm.total) ? vm.currentPage + 2 : vm.total;
