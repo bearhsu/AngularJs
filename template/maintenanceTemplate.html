@@ -1,0 +1,69 @@
+<style>
+    .maintenance .maintenance__input-box {
+        font-size: 1.6rem;
+        /*        width: 60rem;*/
+    }
+
+    .maintenance table tr th {
+        text-align: right;
+    }
+
+    .maintenance input,
+    .maintenance select {
+        width: 15rem;
+        line-height: 2rem;
+    }
+
+</style>
+
+<div id="maintenance" class="panel maintenance" ng-controller="maintenanceController" ng-cloak>
+    <div class="panel__header">
+        <button type="button" class="close" ng-click="closeThisDialog('cancel')">&times;</button>
+        <h4 class="myModalAlertLabel modal-title"><i class="fas fa-th-large"></i>修改客戶資料</h4>
+    </div>
+    <div class="panel__content">
+
+        <div class="panel__body">
+            <form name="change" class="maintenance__input-box">
+                <table style=" width: 80%; margin: 0 auto;">
+                    <tr>
+                        <th>客戶編號：</th>
+                        <td>
+                            <input type="text" ng-model="tmpData.CUST_ID" ng-required="true">
+                        </td>
+                        <th>客戶姓名：</th>
+                        <td>
+                            <input type="text" ng-model="tmpData.CUST_NAME" ng-required="true">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>存款：</th>
+                        <td>
+                            <input type="number" min="0" ng-model="tmpData.DEPOSIT">
+                        </td>
+                        <th>入會日期：</th>
+                        <td><input type="date" ng-model="tmpData.ENTRY_DATE"></td>
+                    </tr>
+                    <tr>
+                        <th>等級：</th>
+                        <td>
+                            <select ng-model="tmpData.VIP_CODE" ng-options="value.PARAM_CODE as value.PARAM_NAME for (key, value) in main.param">
+                                <option value="">請選擇</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <div class="comfirm-box text-center">
+                    <button class="btn" ng-click="change.$valid && maintenance()">
+                        修改
+                    </button>
+                    <button class="btn" ng-click="init()">清除</button>
+                </div>
+            </form>
+
+            
+        </div>
+
+    </div>
+
+</div>

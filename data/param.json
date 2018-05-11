@@ -1,0 +1,17 @@
+[
+    {
+        "PARAM_ORDER": "1",
+        "PARAM_NAME": "一般",
+        "PARAM_CODE": "N"
+    },
+    {
+        "PARAM_ORDER": "2",
+        "PARAM_NAME": "黃金",
+        "PARAM_CODE": "G"
+    },
+    {
+        "PARAM_ORDER": "3",
+        "PARAM_NAME": "鑽石",
+        "PARAM_CODE": "D"
+    }
+]

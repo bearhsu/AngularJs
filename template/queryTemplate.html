@@ -1,0 +1,70 @@
+<style>
+    .query {
+        /*        width: 60rem;*/
+    }
+
+    .query .query__input-box {
+        font-size: 1.6rem;
+    }
+
+    .query .query__input-box {
+        /*        text-align: center;*/
+    }
+
+    .query table tr th {
+        text-align: right;
+    }
+
+    .query input,
+    .query select {
+        width: 15rem;
+        line-height: 2rem;
+    }
+</style>
+<div class="panel query" ng-controller="queryController" ng-cloak>
+    <div class="panel__header">
+        <button type="button" class="close" ng-click="closeThisDialog('cancel')">&times;</button>
+        <h4 class="myModalAlertLabel">
+            <i class="fas fa-th-large"></i>查詢客戶資料</h4>
+    </div>
+    <div>
+        <div class="panel__content">
+
+            <div class="panel__body">
+                <div class="query__input-box">
+                    <table style=" width: 80%; margin: 0 auto;">
+                        <tr>
+                            <th>客戶編號：</th>
+                            <td>
+                                <input type="text" ng-model="tmpData.custId">
+                            </td>
+                            <th>客戶姓名：</th>
+                            <td>
+                                <input type="text" ng-model="tmpData.custName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>等級：</th>
+                            <td>
+                                <select ng-model="tmpData.vipCode" ng-options="vaule.PARAM_CODE as vaule.PARAM_NAME for (key, vaule) in main.param">
+                                    <option value="">請選擇</option>
+                                </select>
+                            </td>
+                            <th>入會日期：</th>
+                            <td>
+                                <input type="date" ng-model="tmpData.entryDate">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="comfirm-box text-center">
+                    <button class="btn" ng-click="query()">查詢</button>
+                    <button class="btn" ng-click="init()">清除</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

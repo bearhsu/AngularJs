@@ -1,0 +1,121 @@
+<style>
+    .result {
+        font-size: 1rem;
+        transition: all 0;
+    }
+    .result .result__table {
+        width: 100%;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        border-collapse: collapse;
+        text-align: center;
+    }
+    
+    .result .result__table th {
+      cursor: pointer;
+      color:#fff;
+      background:#3498DB;/*#1b1e24;*/
+      border-bottom:.2rem solid #9ea7af;
+      border-right: .2rem solid #C1C3D1;/*#343a45;*/
+      font-size:2rem;
+      font-weight: 100;
+      padding:2.4rem;
+      text-shadow: 0 .1rem .1rem rgba(0, 0, 0, .1);
+      vertical-align:middle;
+    }
+
+    .result__table th:first-child {
+      border-top-left-radius:.3rem;
+    }
+
+    .result__table th:last-child {
+      border-top-right-radius:.3rem;
+      border-right:none;
+    }
+
+    .result__table tr {
+      border-top: 1px solid #C1C3D1;
+      border-bottom: 1px solid #C1C3D1;
+      color:#333;
+      font-size:1.6rem;
+      font-weight:normal;
+      text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+    }
+
+    .result__table tr:hover td {
+      background:#1e69de;/*#4E5066;*/
+      color:#FFFFFF;
+/*      border-top: 1px solid #22262e;*/
+    }
+
+    .result__table tr:first-child {
+      border-top:none;
+    }
+
+    .result__table tr:last-child {
+      border-bottom:none;
+    }
+
+    .result__table tr:nth-child(odd) .result .result__table td {
+      background:#EBEBEB;
+    }
+
+    .result__table tr:nth-child(odd):hover .result__table td {
+      background:#1e69de;/*#4E5066;*/
+    }
+
+    .result__table tr:last-child td:first-child {
+      border-bottom-left-radius:3px;
+    }
+
+    .result__table tr:last-child td:last-child {
+      border-bottom-right-radius:3px;
+    }
+
+    .result__table td {
+      background:#FFFFFF;
+      padding:20px;
+      text-align:left;
+      vertical-align:middle;
+      font-weight:300;
+      font-size:18px;
+      text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+      border-right: 1px solid #C1C3D1;
+    }
+
+    .result__table td:last-child {
+      border-right: 0px;
+    }
+    
+</style>
+
+<div id="result-controller" class="result panel" ng-controller="resultController" ng-cloak>
+    <div class="panel__header">
+        <h4><i class="fas fa-th-large"></i>客戶資料表</h4>
+    </div>
+    <div class="panel__content">
+        <div class="panel__body">
+            <table class="result__table">
+                <thead>
+                    <tr>
+                        <th ng-click="change('CUST_ID')">客戶編號<i ng-if="main.order=='CUST_ID'" ng-class="{true: 'fas fa-caret-down', false: 'fas fa-caret-up'}[upOrDown]"></i></th>
+                        <th ng-click="change('CUST_NAME')">客戶名稱<i ng-if="main.order=='CUST_NAME'" ng-class="{true: 'fas fa-caret-down', false: 'fas fa-caret-up'}[upOrDown]"></i></th>
+                        <th ng-click="change('PARAM_ORDER')">等級<i ng-if="main.order=='PARAM_ORDER'" ng-class="{true: 'fas fa-caret-down', false: 'fas fa-caret-up'}[upOrDown]"></i></th>
+                        <th ng-click="change('DEPOSIT')">存款<i ng-if="main.order=='DEPOSIT'" ng-class="{true: 'fas fa-caret-down', false: 'fas fa-caret-up'}[upOrDown]"></i></th>
+                        <th ng-click="change('ENTRY_DATE')">入會日期<i ng-if="main.order=='ENTRY_DATE'" ng-class="{true: 'fas fa-caret-down', false: 'fas fa-caret-up'}[upOrDown]"></i></th>
+                    </tr>
+                </thead>
+                
+                <tr ng-click="transfer(row)" ng-repeat="row in main.data | filter: filter | vipCode: main.param | orderBy : main.order : upOrDown | limitTo: limit : begin ">
+                    <td>{{row.CUST_ID}}</td>
+                    <td>{{row.CUST_NAME}}</td>
+                    <td>{{row.PARAM_NAME}}</td>
+                    <td>{{row.DEPOSIT | number:','}}</td>
+                    <td>{{row.ENTRY_DATE | date: 'yyyy/MM/dd'}}</td>
+                </tr>
+            </table>
+
+            <paging list="main.data" limit="limit" begin="begin" buttons="5"></paging>
+            
+        </div>
+    </div>
+</div>

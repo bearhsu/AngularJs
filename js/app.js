@@ -1,0 +1,1 @@
+var eApp = angular.module("eApp", ['ngAnimate']);

@@ -1,0 +1,23 @@
+<style>
+    .template-controll.dialog .dialog__content {
+        font-size: 1.6rem;
+    }
+
+</style>
+
+<div id="template-controll" class="template-controll" ng-controller="templateControll" ng-cloak>
+    <div class="panel">
+        <div class="panel__header">
+            <h4><i class="fas fa-th-large"></i>面版置入</h4>
+        </div>
+        <div class="panel__content">
+
+            <div class="panel__body text-center">
+                <input type="checkbox" ng-model="main.query" /> 查詢面板
+                <input type="checkbox" ng-model="main.maintenance" /> 修改面板
+            </div>
+
+        </div>
+
+    </div>
+</div>

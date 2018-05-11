@@ -1,0 +1,8 @@
+css/abstracts/
+css/base/
+ngDialog/
+*.scss
+*.map
+node_modules/
+*.docx
+*.pdf

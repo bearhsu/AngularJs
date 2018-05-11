@@ -1,0 +1,15 @@
+{
+  "name": "angularjspro-1",
+  "version": "1.0.0",
+  "description": "systex pratice",
+  "main": "js/app.js",
+  "scripts": {
+    "compile:scss": "node-sass css/main.scss css/main.css -w"
+  },
+  "author": "Johnson",
+  "license": "ISC",
+  "dependencies": {
+    "ng-dialog": "^1.4.0",
+    "node-sass": "^4.8.3"
+  }
+}
