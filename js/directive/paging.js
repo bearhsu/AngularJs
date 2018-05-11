@@ -8,33 +8,38 @@ eApp.directive("paging", function($parse) {
             buttons: '@?'
         },
         link: function(scope,elem,attrs) {
-            scope.currentPage = 1;
-            scope.range = [];
-            scope.$watch('currentPage',function(){
-                scope.range = getRange();
+            
+            var vm = scope;
+
+            vm.$watch('currentPage', function(){
+                getRange();
+                vm.begin = (vm.currentPage-1) * vm.limit;
             });
-            scope.active = function(index) {
-                scope.currentPage = index;
-                scope.begin = (index-1) * scope.limit;
+
+            vm.$watch('list.length',function() {
+                vm.active(1);
+            });
+
+            vm.active = function(index) {
+                vm.currentPage = index;
             };
+
             function getRange() {
-                var start = (scope.currentPage - 2 > 0) ? scope.currentPage - 2 : 1;
-                var end = (scope.currentPage + 2 < scope.total) ? scope.currentPage + 2 : scope.total;
-                end = end - start < 5 ? start + 4 > scope.total ? scope.total : start + 4 : end;
+                vm.size = vm.list.length;
+                vm.total = Math.ceil(vm.size/vm.limit);
+                var start = (vm.currentPage - 2 > 0) ? vm.currentPage - 2 : 1;
+                var end = (vm.currentPage + 2 < vm.total) ? vm.currentPage + 2 : vm.total;
+                end = end - start < 5 ? start + 4 > vm.total ? vm.total : start + 4 : end;
                 start = end - start < 5 ? end - 4 > 0 ? end - 4 : 1 : start;
-                var range = [];
+                vm.range = [];
                 for (var i = start; i <= end; i ++) {
-                    range.push(i);
+                    vm.range.push(i);
                 }
-                return range;
             };
         },
         controller: function($scope, $element) {
-            if($scope.list instanceof Array) {
-                $scope.size = $scope.list.length;
-                $scope.limit = parseInt($scope.limit) || 10;
-                $scope.total = Math.ceil($scope.size/$scope.limit);
-            }
+            $scope.currentPage = 1;
+            $scope.limit = parseInt($scope.limit) || 10;
         },
         template: 
             '<div style="margin-top: 1rem;"> ' +

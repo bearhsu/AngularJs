@@ -9,8 +9,6 @@ eApp.controller('main', function ($scope, $http, $controller, sysInfoService, $q
     var table = console.table;
     
     $scope.init = function () {
-//        table(sysInfoService);
-//        sysInfoService.setUserName('Johnson'); 帥的
         
         $scope.main = {
             query: false,
@@ -31,11 +29,9 @@ eApp.controller('main', function ($scope, $http, $controller, sysInfoService, $q
             $scope.$broadcast('receive',data);
         });
         
-        // mapping
         $q.all([getData(),getParam()]).then(function(result) {
             $scope.main.param = result[1];
             $scope.main.data = result[0];
-            //mapping(result[0], result[1], 'VIP_CODE', 'PARAM_CODE');
         });
         
         function getData() {

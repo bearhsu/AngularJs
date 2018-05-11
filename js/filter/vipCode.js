@@ -5,7 +5,7 @@ eApp.filter('vipCode', function () {
                 if(param[i].PARAM_CODE == data[j].VIP_CODE) {
                     data[j] = angular.extend(data[j], param[i]);
                 }
-            }            
+            }   
         }
         return data;
     };

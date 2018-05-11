@@ -4,8 +4,6 @@ eApp.controller('maintenanceController', function($scope, $controller) {
         $scope: $scope
     });
     
-    var table = console.table;
-    
     $scope.$on('receive', function(event, data) {
         angular.copy(data,$scope.tmpData);
         $scope.tmpData.ENTRY_DATE = new Date(data.ENTRY_DATE);
