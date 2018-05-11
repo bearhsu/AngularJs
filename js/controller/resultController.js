@@ -5,7 +5,7 @@ eApp.controller('resultController', function ($scope, $controller) {
     });
 
     $scope.controllerName = 'resultController';
-    $scope.limit = 4;
+    $scope.limit = 5;
 
     var log = console.log;
 
