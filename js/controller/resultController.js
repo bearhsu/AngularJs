@@ -17,7 +17,7 @@ eApp.controller('resultController', function ($scope, $controller) {
             ENTRY_DATE: ''
         };
         $scope.upOrDown = false;
-        // 查詢次數
+        // trigger for paging
         $scope.count = 0;
     }
 
@@ -27,6 +27,7 @@ eApp.controller('resultController', function ($scope, $controller) {
         } else {
             $scope.main.order = field;
         }
+        $scope.count ++;
     }
 
     $scope.transfer = function (data) {
