@@ -1,3 +1,6 @@
+//想辦法解決ng-repeat row in getArray()
+//https://code.angularjs.org/1.4.6/docs/error/$rootScope/infdig
+
 eApp.directive("paging", function($parse, $filter) {
     return {
         restrict: 'E',
@@ -12,26 +15,19 @@ eApp.directive("paging", function($parse, $filter) {
             
             var vm = scope;
 
-            vm.$watch('currentPage + trigger', function(){
+            vm.$watchGroup(['currentPage', 'trigger'], function(){
                 compulateRange();
                 vm.begin = (vm.currentPage-1) * vm.pageSize;
                 vm.outputList = $filter('limitTo')(vm.inputList, vm.pageSize, vm.begin);
             });
 
-            // 為了因應查詢結果監聽，但會導致記憶體爆掉
-            // 有好的修改方案請提出
-            // vm.$watchCollection('inputList',function() {
-            //     vm.active(1);
-            // });
-
-            // 所以製造一個trigger讓使用者告知何時陣列內容改變
+            // 製造一個trigger讓使用者告知何時陣列內容改變
             if(vm.trigger) {
                 vm.$watch('trigger',function() {
                     vm.active(1);
                 });
             }
             
-
             vm.active = function(index) {
                 vm.currentPage = index;
             };
@@ -55,7 +51,6 @@ eApp.directive("paging", function($parse, $filter) {
             $scope.currentPage = 1;
             $scope.begin = 0;
             $scope.pageSize = parseInt($scope.pageSize) || 10;
-            // $scope.$parse('trigger');
         },
         template: 
             '<div style="margin-top: 1rem;"> ' +

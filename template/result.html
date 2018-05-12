@@ -114,11 +114,12 @@
                 </tr>
             </table>
 
+			<!-- 此地方必須設置trigger 為了配合查詢及排序造成陣列常常變動 -->
 			<paging 
 				input-list="main.data | filter: filter | vipCode: main.param | orderBy : main.order : upOrDown" 
 				output-list="currentPage"
 				page-size="limit" 
-				trigger="{{count}}"
+				trigger="{{count}}" 
 				buttons="5">
 			</paging>
             
