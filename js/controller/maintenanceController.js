@@ -33,7 +33,7 @@ eApp.controller('maintenanceController', function($scope, $controller) {
     function removeNull(data) {
         var copy = angular.copy(data);
         for(var i in copy) {
-            if(copy[i] == null || copy[i] == '' || copy[i] == undefined) {
+            if(copy[i] == null || copy[i] == undefined) {
                 delete copy[i];
             }
         }

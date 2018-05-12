@@ -5,7 +5,7 @@ eApp.controller('resultController', function ($scope, $controller) {
     });
 
     $scope.controllerName = 'resultController';
-    $scope.limit = 5;
+    $scope.limit = 10;
 
     var log = console.log;
 
@@ -17,6 +17,8 @@ eApp.controller('resultController', function ($scope, $controller) {
             ENTRY_DATE: ''
         };
         $scope.upOrDown = false;
+        // 查詢次數
+        $scope.count = 0;
     }
 
     $scope.change = function (field) {
@@ -38,6 +40,8 @@ eApp.controller('resultController', function ($scope, $controller) {
         $scope.filter.CUST_NAME = data.custName || '';
         $scope.filter.ENTRY_DATE = data.entryDate || '';
         $scope.filter.VIP_CODE = data.vipCode || '';
+        // trigger paging directive
+        $scope.count ++;
     });
 
     $scope.init();

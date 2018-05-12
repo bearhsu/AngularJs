@@ -14,7 +14,8 @@ eApp.controller('main', function ($scope, $http, $controller, sysInfoService, $q
             query: false,
             maintenance: false,
             data: [],
-            param: []
+            param: [],
+            order: 'CUST_ID'
         };
         
         // 接收來自query-template的事件(查詢)

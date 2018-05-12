@@ -16,9 +16,9 @@
       background:#3498DB;/*#1b1e24;*/
       border-bottom:.2rem solid #9ea7af;
       border-right: .2rem solid #C1C3D1;/*#343a45;*/
-      font-size:2rem;
+      font-size:1.5rem;
       font-weight: 100;
-      padding:2.4rem;
+      padding:2rem;
       text-shadow: 0 .1rem .1rem rgba(0, 0, 0, .1);
       vertical-align:middle;
     }
@@ -73,7 +73,7 @@
 
     .result__table td {
       background:#FFFFFF;
-      padding:20px;
+      padding:10px 15px;
       text-align:left;
       vertical-align:middle;
       font-weight:300;
@@ -105,7 +105,7 @@
                     </tr>
                 </thead>
                 
-                <tr ng-click="transfer(row)" ng-repeat="row in main.data | filter: filter | vipCode: main.param | orderBy : main.order : upOrDown | limitTo: limit : begin ">
+                <tr ng-click="transfer(row)" ng-repeat="row in currentPage">
                     <td>{{row.CUST_ID}}</td>
                     <td>{{row.CUST_NAME}}</td>
                     <td>{{row.PARAM_NAME}}</td>
@@ -114,7 +114,13 @@
                 </tr>
             </table>
 
-            <paging size="main.data | filter: filter | size" limit="limit" begin="begin" buttons="5"></paging>
+			<paging 
+				input-list="main.data | filter: filter | vipCode: main.param | orderBy : main.order : upOrDown" 
+				output-list="currentPage"
+				page-size="limit" 
+				trigger="{{count}}"
+				buttons="5">
+			</paging>
             
         </div>
     </div>
