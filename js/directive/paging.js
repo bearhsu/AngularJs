@@ -1,11 +1,18 @@
-//想辦法解決ng-repeat row in getArray()
-//https://code.angularjs.org/1.4.6/docs/error/$rootScope/infdig
-
+/**
+ * 1. 想辦法解決 
+ * https://code.angularjs.org/1.4.6/docs/error/$rootScope/infdig
+ *
+ * 2. buttons功能待完成
+ * 
+ * 3. 優化效能
+ */
 eApp.directive("paging", function($parse, $filter) {
     return {
         restrict: 'E',
+        transclude: 'true',
         scope: {
             inputList: '=',
+            showPageSize: '=?',
             outputList: '=',
             pageSize: '=?',
             trigger: '@?',
@@ -14,19 +21,17 @@ eApp.directive("paging", function($parse, $filter) {
         link: function(scope,elem,attrs) {
             
             var vm = scope;
-
-            vm.$watchGroup(['currentPage', 'trigger'], function(){
+            
+            vm.$watchGroup(['currentPage', 'trigger','pageSize'], function(){
                 compulateRange();
                 vm.begin = (vm.currentPage-1) * vm.pageSize;
                 vm.outputList = $filter('limitTo')(vm.inputList, vm.pageSize, vm.begin);
             });
 
             // 製造一個trigger讓使用者告知何時陣列內容改變
-            if(vm.trigger) {
-                vm.$watch('trigger',function() {
-                    vm.active(1);
-                });
-            }
+            vm.$watchGroup(['trigger', 'pageSize'],function() {
+                vm.active(1);
+            });
             
             vm.active = function(index) {
                 vm.currentPage = index;
@@ -53,9 +58,14 @@ eApp.directive("paging", function($parse, $filter) {
             $scope.pageSize = parseInt($scope.pageSize) || 10;
         },
         template: 
+            '<div ng-if="showPageSize" style="font-size: 14px;">' +
+                '<lebel for="pageSize">每頁資料數：</lebel>' +                                    /* 觀念待釐清 */
+                '<input name="pageSize" type="number" max="{{inputList.length}}" min="1" ng-model="$parent.pageSize"></input>' +
+            '</div>' +
+            '<div ng-transclude></div>' + 
             '<div style="margin-top: 1rem;"> ' +
                 '<nav aria-label="Page navigation example">' +
-                    '<ul class="pagination pagination-lg text-center" style="justify-content: center">' +
+                    '<ul class="pagination pagination-lg justify-content-center">' +
                         '<li class="page-item" ng-click="active(1)">' +
                             '<a class="page-link" aria-label="Previous">' +
                                 '<span aria-hidden="true">&laquo;</span>' +
