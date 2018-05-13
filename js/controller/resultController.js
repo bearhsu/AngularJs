@@ -1,4 +1,4 @@
-eApp.controller('resultController', function ($scope, $controller) {
+eApp.controller('resultController', function ($scope, $controller, $filter) {
 
     $controller('BaseController', {
         $scope: $scope
@@ -23,7 +23,7 @@ eApp.controller('resultController', function ($scope, $controller) {
 
     $scope.change = function (field) {
         if (field == $scope.main.order) {
-            $scope.upOrDown = $scope.upOrDown ? false : true;
+            $scope.upOrDown = !$scope.upOrDown;
         } else {
             $scope.main.order = field;
         }
@@ -43,6 +43,12 @@ eApp.controller('resultController', function ($scope, $controller) {
         $scope.filter.VIP_CODE = data.vipCode || '';
         // trigger paging directive
         $scope.count ++;
+    });
+
+    $scope.$watch('count',function() {
+        $scope.list = $filter('filter')($scope.main.data, $scope.filter);
+        $scope.list = $filter('vipCode')($scope.list, $scope.main.param);
+        $scope.list = $filter('orderBy')($scope.list, $scope.main.order, $scope.upOrDown);
     });
 
     $scope.init();

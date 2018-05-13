@@ -1,13 +1,15 @@
 /**
  * 1. 因inputList配合filter常常變動造成系統不穩定 必須解決(console 錯誤一堆、修改資料時網頁當機)
  * https://code.angularjs.org/1.4.6/docs/error/$rootScope/infdig
- *
+ * 
+ * (目前方案是外界必須準備已filter後的陣列)
+ * 
  * 2. buttons功能待完成
  * 
  * 3. 優化效能
  * 
  */
-eApp.directive("paging", function($parse, $filter) {
+eApp.directive("paging",function($parse, $filter) {
     return {
         restrict: 'E',
         transclude: 'true',
@@ -15,7 +17,7 @@ eApp.directive("paging", function($parse, $filter) {
             inputList: '=',
             showPageSize: '=?',
             outputList: '=',
-            pageSize: '=?',
+            pageSize: '=',
             trigger: '@?',
             buttons: '@?'
         },
@@ -40,7 +42,8 @@ eApp.directive("paging", function($parse, $filter) {
 
             function compulateRange() {
                 var size = vm.inputList.length;
-                vm.total = Math.ceil(size/vm.pageSize);
+                //vm.pageSize 會莫名其妙undefined
+                vm.total = Math.ceil(size/vm.pageSize) || 1;
                 // 待修改 (利用buttons數來計算該顯示的buttons數)
                 var start = (vm.currentPage - 2 > 0) ? vm.currentPage - 2 : 1;
                 var end = (vm.currentPage + 2 < vm.total) ? vm.currentPage + 2 : vm.total;
@@ -56,7 +59,7 @@ eApp.directive("paging", function($parse, $filter) {
         controller: function($scope, $element) {
             $scope.currentPage = 1;
             $scope.begin = 0;
-            $scope.pageSize = parseInt($scope.pageSize) || 10;
+            $scope.pageSize = parseInt($scope.pageSize);
         },
         template: 
             '<div ng-if="showPageSize" style="font-size: 14px;">' +
