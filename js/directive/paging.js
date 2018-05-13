@@ -1,10 +1,11 @@
 /**
- * 1. 想辦法解決 
+ * 1. 因inputList配合filter常常變動造成系統不穩定 必須解決(console 錯誤一堆、修改資料時網頁當機)
  * https://code.angularjs.org/1.4.6/docs/error/$rootScope/infdig
  *
  * 2. buttons功能待完成
  * 
  * 3. 優化效能
+ * 
  */
 eApp.directive("paging", function($parse, $filter) {
     return {

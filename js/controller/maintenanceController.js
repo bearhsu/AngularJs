@@ -22,7 +22,7 @@ eApp.controller('maintenanceController', function($scope, $controller) {
     $scope.maintenance = function() {
         for(var i in $scope.main.data) {
             if($scope.main.data[i].CUST_ID == $scope.tmpData.CUST_ID) {
-                $scope.main.data[i] = angular.extend($scope.main.data[i],removeNull($scope.tmpData));
+                angular.extend($scope.main.data[i],removeNull($scope.tmpData));
                 alert('修改成功!');
                 return;
             }
