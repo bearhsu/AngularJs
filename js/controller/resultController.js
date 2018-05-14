@@ -50,6 +50,6 @@ eApp.controller('resultController', function ($scope, $controller, $filter) {
         $scope.list = $filter('vipCode')($scope.list, $scope.main.param);
         $scope.list = $filter('orderBy')($scope.list, $scope.main.order, $scope.upOrDown);
     });
-
+    
     $scope.init();
 });

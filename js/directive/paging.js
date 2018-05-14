@@ -50,9 +50,9 @@ eApp.directive("paging",function($parse, $filter) {
                 end = end - start < 5 ? start + 4 > vm.total ? vm.total : start + 4 : end;
                 start = end - start < 5 ? end - 4 > 0 ? end - 4 : 1 : start;
                 
-                vm.range = [];
+                vm.range.length = 0;
                 for (var i = start; i <= end; i ++) {
-                    vm.range.push(i);
+                    vm.range[vm.range.length] = i;
                 }
             };
         },
@@ -60,6 +60,7 @@ eApp.directive("paging",function($parse, $filter) {
             $scope.currentPage = 1;
             $scope.begin = 0;
             $scope.pageSize = parseInt($scope.pageSize);
+            $scope.range = [];
         },
         template: 
             '<div ng-if="showPageSize" style="font-size: 14px;">' +
